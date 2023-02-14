@@ -3,6 +3,7 @@ import { EmailValidator, FormBuilder, FormControl, FormGroup, Validators } from 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StudentListComponent } from '../student-list/student-list.component';
 import { Student } from '../../models/student';
+import { StudentService } from '../../services/student.service';
 
 @Component({
   selector: 'app-student-form',
@@ -10,27 +11,29 @@ import { Student } from '../../models/student';
   styleUrls: ['./student-form.component.css']
 })
 export class StudentFormComponent{
-  action: string;
-  studentForm: FormGroup;
-  @Output() newStudentEvent = new EventEmitter<Student>();
-  @Output() editStudentEvent = new EventEmitter<Student>();
+  action!: string;
+  studentForm!: FormGroup;
+  student!: Student;
+
   constructor(
     private formBuilder: FormBuilder,
+    private studentService: StudentService,
     private dialogRef: MatDialogRef<StudentFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public student: Student
+    @Inject(MAT_DIALOG_DATA) public studentIndex: number
   ){
-    this.action = student != null ? 'Editar' : 'Crear';
-
-    if(student == null){
-      this.studentForm = this.formBuilder.group({
-        name: ['', [Validators.required, Validators.maxLength(15)]], 
-        surname: ['', [Validators.required, Validators.maxLength(15)]], 
-        email: ['', [Validators.required, Validators.email]],
-        cellphone: ['', [Validators.required, Validators.pattern('^[0-9]{9,15}$')]],
-        bornDate: ['', Validators.required],
-        isActive: [false]
-      });
+    if(this.studentIndex != null){
+      this.buildFormEdit();
     }else{
+      this.buildFormAdd();
+    }
+  }
+
+  private buildFormEdit(): void{
+    this.studentService.getStudentPromise(this.studentIndex).then((student: Student) => {
+      this.student = student;
+
+      this.action = 'Editar';
+
       this.studentForm = this.formBuilder.group({
         name: [this.student.name, [Validators.required, Validators.maxLength(15)]], 
         surname: [this.student.surname, [Validators.required, Validators.maxLength(15)]], 
@@ -39,7 +42,20 @@ export class StudentFormComponent{
         bornDate: [this.student.bornDate, Validators.required],
         isActive: [this.student.isActive]
       });
-    }
+    });
+  }
+
+  private buildFormAdd(): void{
+    this.action = 'Crear';
+
+    this.studentForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(15)]], 
+      surname: ['', [Validators.required, Validators.maxLength(15)]], 
+      email: ['', [Validators.required, Validators.email]],
+      cellphone: ['', [Validators.required, Validators.pattern('^[0-9]{9,15}$')]],
+      bornDate: ['', Validators.required],
+      isActive: [false]
+    });
   }
 
   addStudent(){
@@ -52,10 +68,10 @@ export class StudentFormComponent{
       isActive: this.studentForm.get('isActive')!.value
     };
 
-    if(this.student != null){
-      this.editStudentEvent.emit(student);
+    if(this.studentIndex != null){
+      this.studentService.editStudent(student, this.studentIndex);
     }else{
-      this.newStudentEvent.emit(student);
+      this.studentService.addNewStudent(student);
     }
     this.closeForm();
   }
