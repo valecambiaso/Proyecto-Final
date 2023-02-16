@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, filter, from, map, Observable, of } from 'rxjs';
 import { Student } from '../models/student';
 
 @Injectable({
@@ -79,5 +79,13 @@ export class StudentService {
   removeStudent(studentIndex: number):void{
     this.students.splice(studentIndex,1);
     this.students$.next(this.students);
+  }
+  
+  activeStudents(){
+    return from(this.students).pipe(
+      filter((student: Student) => student.isActive),
+      map((student) => {return student}),
+      catchError((error) => {throw new Error(error)})
+    );
   }
 }

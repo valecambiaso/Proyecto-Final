@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, Inject, Output, EventEmitter } from '@angular/core';
-import { EmailValidator, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { StudentListComponent } from '../student-list/student-list.component';
 import { Student } from '../../models/student';
 import { StudentService } from '../../services/student.service';
 
@@ -58,7 +57,7 @@ export class StudentFormComponent{
     });
   }
 
-  addStudent(){
+  addStudent(): void{
     const student: Student = {
       name: this.studentForm.get('name')!.value,
       surname: this.studentForm.get('surname')!.value,
@@ -76,7 +75,7 @@ export class StudentFormComponent{
     this.closeForm();
   }
 
-  closeForm(){
+  closeForm(): void{
     this.dialogRef.close();
   }
 }

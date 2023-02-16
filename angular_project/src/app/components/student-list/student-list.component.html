@@ -1,19 +1,19 @@
 <h4 appTitleStyle>Lista de Alumnos</h4>
 
 <div class="row">
-    <mat-form-field class="col-md-4">
-        <mat-label>Filtrar Alumnos</mat-label>
-        <input type="text" matInput (keyup)="filterTable($event)">
-    </mat-form-field>
-
-    <button mat-button class="add-button col-md-4" (click)="openModalAdd()">
+    <button mat-button class="add-button col-md-3" (click)="openModalAdd()">
         <mat-icon style="color: white">add_box</mat-icon>
         <span style="color: white">Agregar Alumno</span>
+    </button>
+
+    <button mat-button class="add-button col-md-3" (click)="activeStudents()">
+        <mat-icon style="color: white">remove_red_eye</mat-icon>
+        <span style="color: white">Mostrar Alumnos Activos</span>
     </button>
 </div>
 
 <div>
-    <mat-table [dataSource]="dataSource">
+    <mat-table [dataSource]="(dataSource$ | async)!">
         <ng-container matColumnDef="fullname">
             <th mat-header-cell *matHeaderCellDef>Nombre y Apellido</th>
             <td mat-cell *matCellDef="let element">{{element | nameSurname}}</td>
