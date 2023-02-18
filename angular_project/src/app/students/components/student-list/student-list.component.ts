@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Student } from 'src/app/models/student';
 import { StudentFormComponent } from '../student-form/student-form.component';
 import { Observable, Subscription, filter, map, from, of } from 'rxjs';
-import { StudentService } from '../../services/student.service';
+import { StudentService } from '../../../services/student.service';
 
 @Component({
   selector: 'app-student-list',

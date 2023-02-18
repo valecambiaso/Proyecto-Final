@@ -15,4 +15,9 @@
 
 .grid-content{
     grid-area: main;
+    padding-left: 15px;
+}
+
+.content{
+    display: inline-flex;
 }
