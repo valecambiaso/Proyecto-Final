@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Student } from 'src/app/models/student';
 import { StudentFormComponent } from '../student-form/student-form.component';
 import { Observable, Subscription, filter, map, from, of } from 'rxjs';
-import { StudentService } from '../../../services/student.service';
-
+import { StudentService } from '../../services/student.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -21,7 +21,8 @@ export class StudentListComponent implements OnInit, OnDestroy{
 
     constructor(
       private dialog: MatDialog,
-      private studentService: StudentService
+      private studentService: StudentService,
+      private router: Router
     ){}
 
     ngOnInit(): void {
@@ -65,4 +66,7 @@ export class StudentListComponent implements OnInit, OnDestroy{
       const dialogRef = this.dialog.open(StudentFormComponent, {data: student});
     }
 
+    seeDetails(student: Student){
+      this.router.navigate(['students/details', student]);
+    }
 }

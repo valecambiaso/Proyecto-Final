@@ -5,8 +5,7 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 
 const routes: Routes = [ //Defino las rutas que forman parte del proyecto
     {path: 'students', children:[
-        {path: 'list', component: StudentListComponent},
-        {path: 'details/:id', component: StudentDetailsComponent}
+        {path: 'details', component: StudentDetailsComponent}
     ]}
 ];
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, filter, from, map, Observable, of } from 'rxjs';
-import { Student } from '../models/student';
+import { Student } from '../../models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -71,9 +71,17 @@ export class StudentService {
   }
 
   editStudent(student:Student, index:number):void{
-    this.students.splice(index,1);
-    this.students.unshift(student);
+    this.students[index] = student;
     this.students$.next(this.students);
+
+    /*PROBAR (SI ANDA ADAPTAR PARA ELIMINAR ESTUDIANTE)
+    let studentIndex = this.students.findIndex((s:Student)=>s===student);
+
+    if(studentIndex > -1){
+      this.students[studentIndex] = student; 
+      this.students$.next(this.students);
+    }
+    */
   }
 
   removeStudent(studentIndex: number):void{

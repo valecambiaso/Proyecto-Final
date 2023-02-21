@@ -1,0 +1,37 @@
+<h4 appTitleStyle>{{action}} Curso</h4>
+
+<div mat-dialog-content class="dialog">
+    <form [formGroup]="courseForm">
+        <div class="form-group mb-3">
+            <label class="form-label">Comisión</label>
+            <input formControlName="commission" type="number" class="form-control" required>
+            <div class="valid" *ngIf="courseForm.controls['commission'].dirty && courseForm.controls['commission'].valid">Campo correcto</div>
+            <div class="invalid" *ngIf="courseForm.controls['commission'].dirty && courseForm.controls['commission'].errors?.['required']">Este campo no puede ser vacío</div>
+            <div class="invalid" *ngIf="courseForm.controls['commission'].dirty && courseForm.controls['commission'].errors?.['pattern']">Este campo tiene un formato incorrecto</div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Nombre del Curso</label>
+            <input formControlName="courseName" type="text" class="form-control">
+            <div class="valid" *ngIf="courseForm.controls['courseName'].dirty && courseForm.controls['courseName'].valid">Campo correcto</div>
+            <div class="invalid" *ngIf="courseForm.controls['courseName'].dirty && courseForm.controls['courseName'].errors?.['required']">Este campo no puede ser vacío</div>
+            <div class="invalid" *ngIf="courseForm.controls['courseName'].dirty && courseForm.controls['courseName'].errors?.['maxlength']">Este campo no puede tener más de 15 caracteres</div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Profesor</label>
+            <input formControlName="professorName" type="text" class="form-control">
+            <div class="valid" *ngIf="courseForm.controls['professorName'].dirty && courseForm.controls['professorName'].valid">Campo correcto</div>
+            <div class="invalid" *ngIf="courseForm.controls['professorName'].dirty && courseForm.controls['professorName'].errors?.['required']">Este campo no puede ser vacío</div>
+            <div class="invalid" *ngIf="courseForm.controls['professorName'].dirty && courseForm.controls['professorName'].errors?.['maxlength']">Este campo no puede tener más de 15 caracteres</div>
+        </div>
+        <div class="form-group mb-3">
+            <div class="form-check">
+                <input formControlName="openRegistrations" type="checkbox" class="form-check-input">
+                <label class="form-check-label" for="exampleCheck1">Inscripciones Abiertas</label>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-secondary" (click)="closeForm()">Cerrar</button>
+    <button mat-flat-button (click)="addCourse()" class="btn btn-purple" [disabled]="courseForm.invalid">{{action}}</button>
+</div>

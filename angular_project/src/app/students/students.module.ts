@@ -6,11 +6,7 @@ import { StudentFormComponent } from './components/student-form/student-form.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { StudentsRoutingModule } from './student-routing.module';
-import { NameSurnamePipe } from '../pipes/name-surname.pipe';
-import { BooleanToTextPipe } from '../pipes/boolean-to-text.pipe';
-import { StudentService } from '../services/student.service';
-import { TitleStyleDirective } from '../directives/title-style.directive';
-import { AppModule } from '../app.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,13 +19,10 @@ import { AppModule } from '../app.module';
     MaterialModule,
     StudentsRoutingModule,
     ReactiveFormsModule,
-    NameSurnamePipe,
-    BooleanToTextPipe,
-    TitleStyleDirective,
-    AppModule
+    SharedModule
   ],
   providers: [
-    StudentService
+    
   ]
 })
 export class StudentsModule { }
