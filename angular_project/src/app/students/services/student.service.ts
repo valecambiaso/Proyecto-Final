@@ -73,15 +73,6 @@ export class StudentService {
   editStudent(student:Student, index:number):void{
     this.students[index] = student;
     this.students$.next(this.students);
-
-    /*PROBAR (SI ANDA ADAPTAR PARA ELIMINAR ESTUDIANTE)
-    let studentIndex = this.students.findIndex((s:Student)=>s===student);
-
-    if(studentIndex > -1){
-      this.students[studentIndex] = student; 
-      this.students$.next(this.students);
-    }
-    */
   }
 
   removeStudent(studentIndex: number):void{
