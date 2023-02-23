@@ -1,1 +1,1 @@
-Primera entrega del proyecto final del curso de Angular.
+Segunda entrega del proyecto final del curso de Angular.
