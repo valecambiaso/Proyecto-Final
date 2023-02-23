@@ -5,7 +5,6 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { StudentFormComponent } from './components/student-form/student-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
-import { StudentsRoutingModule } from './student-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     MaterialModule,
-    StudentsRoutingModule,
     ReactiveFormsModule,
     SharedModule
   ],

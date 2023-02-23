@@ -1,1 +1,31 @@
-<h4>Cursos en los que está inscripto el alumno {{student | nameSurname }}</h4>
+<div class="details-content">
+    <h3 appTitleStyle>{{student | nameSurname }}</h3>
+
+    <mat-list>
+        <mat-list-item>
+            <span matListItemTitle>{{student.name}}</span>
+            <span matListItemLine>Nombre</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{student.surname}}</span>
+            <span matListItemLine>Apellido</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{student.email}}</span>
+            <span matListItemLine>Email</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{student.cellphone}}</span>
+            <span matListItemLine>Celular</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{student.bornDate | date:'dd/MM/YYYY'}}</span>
+            <span matListItemLine>Fecha de Nacimiento</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{student.isActive | booleanToText:'Si':'No'}}</span>
+            <span matListItemLine>Activo</span>
+        </mat-list-item>
+    </mat-list>
+
+</div>

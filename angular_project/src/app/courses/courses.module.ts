@@ -4,7 +4,6 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
-import { CoursesRoutingModule } from "./course-routing.module";
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
@@ -17,7 +16,6 @@ import { SharedModule } from '../shared/shared.module';
     imports:[
         CommonModule,
         MaterialModule,
-        CoursesRoutingModule,
         ReactiveFormsModule,
         SharedModule
     ],

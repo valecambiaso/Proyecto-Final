@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatFormFieldModule, 
     MatInputModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatListModule
   ],
   exports: [
     MatTableModule,
@@ -30,7 +32,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }

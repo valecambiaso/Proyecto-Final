@@ -1,1 +1,22 @@
-<h4>Alumnos inscriptos en el curso {{ course.courseName }}</h4>
+<div class="details-content">
+    <h3 appTitleStyle>{{course.courseName}}</h3>
+
+    <mat-list>
+        <mat-list-item>
+            <span matListItemTitle>{{course.courseName}}</span>
+            <span matListItemLine>Nombre del Curso</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{course.commission}}</span>
+            <span matListItemLine>Comisión</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{course.professorName}}</span>
+            <span matListItemLine>Profesor</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>{{course.openRegistrations | booleanToText:'Si':'No'}}</span>
+            <span matListItemLine>Inscripciones Abiertas</span>
+        </mat-list-item>
+    </mat-list>
+
