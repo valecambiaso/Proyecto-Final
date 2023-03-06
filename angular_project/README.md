@@ -1,7 +1,8 @@
 Entrega del desafío Consumir Datos de una APIRest.
 
 *Importante*
-Comandos para levantar el servidor json:
+
+En la carpeta database ejecutar los siguientes comandos para levantar el servidor json:
 
 npm install -g json-server
 
