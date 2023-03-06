@@ -18,7 +18,7 @@
       "id": "3",
       "commission": 45867,
       "courseName": "Vue",
-      "openRegistrations": false,
+      "openRegistrations": true,
       "professorName": "Renata Pérez"
     },
     {
@@ -32,7 +32,7 @@
       "id": "J_4lkOv",
       "commission": 45368,
       "courseName": "JavaScript",
-      "openRegistrations": false,
+      "openRegistrations": true,
       "professorName": "Raúl Quinteros"
     }
   ],

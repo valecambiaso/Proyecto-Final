@@ -15,33 +15,36 @@ export class CourseService {
   }
 
   getCourseById(courseId:string): Observable<Course>{
-    return this.httpClient.get<Course>(`${env.apiURL}/courses/`+courseId)
+    return this.httpClient.get<Course>(`${env.apiURL}/courses/`+courseId).pipe(
+      catchError(this.catchError)
+    );
   }
 
   getAllCoursesObservable(): Observable<Course[]>{
-    return this.httpClient.get<Course[]>(`${env.apiURL}/courses`, {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'encoding': 'UTF-8'
-      })
-    }).pipe(
-      catchError(this.captureError)
+    return this.httpClient.get<Course[]>(`${env.apiURL}/courses`).pipe(
+      catchError(this.catchError)
     );
   }
   
   addNewCourse(course:Course): Observable<Course>{
-    return this.httpClient.post<Course>(`${env.apiURL}/courses`, course)
+    return this.httpClient.post<Course>(`${env.apiURL}/courses`, course).pipe(
+      catchError(this.catchError)
+    );
   }
 
   editCourses(course:Course, courseId:string): Observable<Course>{
-    return this.httpClient.put<Course>(`${env.apiURL}/courses/${courseId}`, course);
+    return this.httpClient.put<Course>(`${env.apiURL}/courses/${courseId}`, course).pipe(
+      catchError(this.catchError)
+    );
   }
 
   removeCourse(courseId:string): Observable<Course>{
-    return this.httpClient.delete<Course>(`${env.apiURL}/courses/${courseId}`);
+    return this.httpClient.delete<Course>(`${env.apiURL}/courses/${courseId}`).pipe(
+      catchError(this.catchError)
+    );
   }
 
-  private captureError(error: HttpErrorResponse){
+  private catchError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       alert(`Error del lado del cliente: ${error.message}`);
     }else{

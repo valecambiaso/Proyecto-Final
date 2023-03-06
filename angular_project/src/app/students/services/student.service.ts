@@ -15,33 +15,36 @@ export class StudentService {
   }
 
   getStudentById(studentId: string): Observable<Student>{
-    return this.httpClient.get<Student>(`${env.apiURL}/students/` + studentId)
+    return this.httpClient.get<Student>(`${env.apiURL}/students/` + studentId).pipe(
+      catchError(this.catchError)
+    );
   }
 
   getAllStudentsObservable(): Observable<Student[]>{
-    return this.httpClient.get<Student[]>(`${env.apiURL}/students`, {
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-        'encoding': 'UTF-8'
-      })
-    }).pipe(
-      catchError(this.captureError)
+    return this.httpClient.get<Student[]>(`${env.apiURL}/students`).pipe(
+      catchError(this.catchError)
     );
   }
   
   addNewStudent(student:Student):Observable<Student>{
-    return this.httpClient.post<Student>(`${env.apiURL}/students`, student)
+    return this.httpClient.post<Student>(`${env.apiURL}/students`, student).pipe(
+      catchError(this.catchError)
+    );
   }
 
   editStudent(student:Student, studentId:string):Observable<Student>{
-    return this.httpClient.put<Student>(`${env.apiURL}/students/${studentId}`, student);
+    return this.httpClient.put<Student>(`${env.apiURL}/students/${studentId}`, student).pipe(
+      catchError(this.catchError)
+    );
   }
 
   removeStudent(studentId: string):Observable<Student>{
-    return this.httpClient.delete<Student>(`${env.apiURL}/students/${studentId}`);
+    return this.httpClient.delete<Student>(`${env.apiURL}/students/${studentId}`).pipe(
+      catchError(this.catchError)
+    );
   }
 
-  private captureError(error: HttpErrorResponse){
+  private catchError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       alert(`Error del lado del cliente: ${error.message}`);
     }else{
