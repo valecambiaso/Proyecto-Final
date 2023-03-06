@@ -18,9 +18,9 @@ export class CourseFormComponent {
     private formBuilder: FormBuilder,
     private courseService: CourseService,
     private dialogRef: MatDialogRef<CourseFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public courseIndex: number
+    @Inject(MAT_DIALOG_DATA) public courseId: string
   ){
-    if(this.courseIndex != null){
+    if(this.courseId != ''){
       this.buildFormEdit();
     }else{
       this.buildFormAdd();
@@ -28,7 +28,7 @@ export class CourseFormComponent {
   }
 
   private buildFormEdit(): void{
-    this.courseService.getCoursePromise(this.courseIndex).then((course: Course) => {
+    this.courseService.getCourseById(this.courseId).subscribe((course: Course) => {
       this.course = course;
 
       this.action = 'Editar';
@@ -55,16 +55,17 @@ export class CourseFormComponent {
 
   addCourse(): void{
     const course: Course = {
+      id: this.courseId,
       commission: this.courseForm.get('commission')!.value,
       courseName: this.courseForm.get('courseName')!.value,
       openRegistrations: this.courseForm.get('openRegistrations')!.value,
       professorName: this.courseForm.get('professorName')!.value,
     };
 
-    if(this.courseIndex != null){
-      this.courseService.editCourses(course, this.courseIndex);
+    if(this.courseId != ''){
+      this.courseService.editCourses(course, this.courseId).subscribe((course:Course) => {});
     }else{
-      this.courseService.addNewCourse(course);
+      this.courseService.addNewCourse(course).subscribe((course:Course) => {});
     }
     this.closeForm();
   }

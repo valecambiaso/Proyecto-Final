@@ -1,16 +1,14 @@
 <h4 appTitleStyle>Lista de Alumnos</h4>
 
-<div class="row">
-    <button mat-button class="add-button col-md-3" (click)="openModalAdd()">
-        <mat-icon style="color: white">add_box</mat-icon>
-        <span style="color: white">Agregar Alumno</span>
-    </button>
 
-    <button mat-button class="add-button col-md-3" (click)="activeStudents()">
-        <mat-icon style="color: white">remove_red_eye</mat-icon>
-        <span style="color: white">Mostrar Alumnos Activos</span>
-    </button>
-</div>
+<ng-container *ngIf="session$ | async as session">
+    <div class="row">
+        <button *ngIf="session.activeUser?.isAdmin" mat-button class="add-button col-md-3" (click)="openModalAdd()">
+            <mat-icon style="color: white">add_box</mat-icon>
+            <span style="color: white">Agregar Alumno</span>
+        </button>
+    </div>
+</ng-container>
 
 <div>
     <mat-table [dataSource]="(dataSource$ | async)!">
@@ -43,10 +41,10 @@
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let element; let student = index">
                 <ng-container *ngIf="session$ | async as session">
-                    <button *ngIf="session.activeUser?.isAdmin" mat-button color="accent" (click)="openModalEdit(student)">
+                    <button *ngIf="session.activeUser?.isAdmin" mat-button color="accent" (click)="openModalEdit(element.id)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button *ngIf="session.activeUser?.isAdmin" mat-button color="warn" (click)="removeStudent(student)">
+                    <button *ngIf="session.activeUser?.isAdmin" mat-button color="warn" (click)="removeStudent(element.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </ng-container>

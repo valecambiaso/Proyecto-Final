@@ -42,24 +42,24 @@ export class StudentListComponent implements OnInit, OnDestroy{
       this.suscription.unsubscribe();
     }
 
-    activeStudents(){
-      
-    }
-
-    removeStudent(studentIndex: number):void{
-      this.studentService.removeStudent(studentIndex);
+    removeStudent(studentId: string):void{
+      this.studentService.removeStudent(studentId).subscribe((student: Student) => {
+        this.dataSource$ = this.studentService.getAllStudentsObservable().pipe(map((students) => new MatTableDataSource<Student>(students)));
+      });
     }
 
     openModalAdd():void{
-      this.openModal(null);
+      this.openModal('');
     }
 
-    openModalEdit(studentIndex: number):void{
-      this.openModal(studentIndex);
+    openModalEdit(studentId: string):void{
+      this.openModal(studentId);
     }
 
-    private openModal(student: any){
-      const dialogRef = this.dialog.open(StudentFormComponent, {data: student});
+    private openModal(student: string){
+      const dialogRef = this.dialog.open(StudentFormComponent, {data: student}).afterClosed().subscribe(()=>{
+        this.dataSource$ = this.studentService.getAllStudentsObservable().pipe(map((students) => new MatTableDataSource<Student>(students)));
+      });
     }
 
     seeDetails(student: Student){

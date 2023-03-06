@@ -44,20 +44,24 @@ export class CourseListComponent {
       this.suscription.unsubscribe();
     }
 
-    removeCourse(courseIndex: number):void{
-      this.courseService.removeCourse(courseIndex);
+    removeCourse(courseId: string):void{
+      this.courseService.removeCourse(courseId).subscribe((course: Course) => {
+        this.dataSource$ = this.courseService.getAllCoursesObservable().pipe(map((courses) => new MatTableDataSource<Course>(courses)));
+      });
     }
 
     openModalAdd():void{
-      this.openModal(null);
+      this.openModal('');
     }
 
-    openModalEdit(courseIndex: number):void{
-      this.openModal(courseIndex);
+    openModalEdit(courseId: string):void{
+      this.openModal(courseId);
     }
 
-    private openModal(course: any){
-      const dialogRef = this.dialog.open(CourseFormComponent, {data: course});
+    private openModal(course: string){
+      const dialogRef = this.dialog.open(CourseFormComponent, {data: course}).afterClosed().subscribe(()=>{
+        this.dataSource$ = this.courseService.getAllCoursesObservable().pipe(map((courses) => new MatTableDataSource<Course>(courses)));
+      });
     }
 
     seeDetails(course: Course){

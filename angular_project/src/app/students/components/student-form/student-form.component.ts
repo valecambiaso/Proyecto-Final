@@ -18,9 +18,9 @@ export class StudentFormComponent{
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private dialogRef: MatDialogRef<StudentFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public studentIndex: number
+    @Inject(MAT_DIALOG_DATA) public studentId: string
   ){
-    if(this.studentIndex != null){
+    if(this.studentId != ''){
       this.buildFormEdit();
     }else{
       this.buildFormAdd();
@@ -28,7 +28,7 @@ export class StudentFormComponent{
   }
 
   private buildFormEdit(): void{
-    /*this.studentService.getStudentPromise(this.studentIndex.toString()).then((student: Student) => {
+    this.studentService.getStudentById(this.studentId).subscribe((student: Student) => {
       this.student = student;
 
       this.action = 'Editar';
@@ -41,7 +41,7 @@ export class StudentFormComponent{
         bornDate: [this.student.bornDate, Validators.required],
         isActive: [this.student.isActive]
       });
-    });*/
+    });
   }
 
   private buildFormAdd(): void{
@@ -59,7 +59,7 @@ export class StudentFormComponent{
 
   addStudent(): void{
     const student: Student = {
-      id: JSON.stringify(this.studentForm.get('name')!.value),
+      id: this.studentId,
       name: this.studentForm.get('name')!.value,
       surname: this.studentForm.get('surname')!.value,
       email: this.studentForm.get('email')!.value,
@@ -68,10 +68,10 @@ export class StudentFormComponent{
       isActive: this.studentForm.get('isActive')!.value
     };
 
-    if(this.studentIndex != null){
-      this.studentService.editStudent(student, this.studentIndex);
+    if(this.studentId != ''){
+      this.studentService.editStudent(student, this.studentId).subscribe((student: Student) => {});
     }else{
-      this.studentService.addNewStudent(student);
+      this.studentService.addNewStudent(student).subscribe((student: Student) => {});
     }
     this.closeForm();
   }

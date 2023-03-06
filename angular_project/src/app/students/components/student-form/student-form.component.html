@@ -1,6 +1,6 @@
 <h4 appTitleStyle>{{action}} Alumno</h4>
 
-<div mat-dialog-content class="dialog">
+<div mat-dialog-content class="dialog" *ngIf="studentForm" >
     <form [formGroup]="studentForm">
         <div class="form-group mb-3">
             <label class="form-label">Nombre</label>
@@ -44,7 +44,7 @@
         </div>
     </form>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions  *ngIf="studentForm" >
     <button mat-button class="btn btn-secondary" (click)="closeForm()">Cerrar</button>
     <button mat-flat-button (click)="addStudent()" class="btn btn-purple" [disabled]="studentForm.invalid">{{action}}</button>
 </div>

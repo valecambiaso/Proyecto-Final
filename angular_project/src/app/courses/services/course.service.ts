@@ -1,80 +1,54 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { Course } from 'src/app/models/course';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { env } from 'src/environment/environment';
+import { catchError, throwError } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class CourseService {
-  private courses$!: BehaviorSubject<Course[]>;
-
-  private courses: Course[] = [
-    {
-      id: '1',
-      commission: 45635,
-      courseName: 'Angular',
-      openRegistrations: true,
-      professorName: 'Julio López'
-    },
-    {
-      id: '2',
-      commission: 45374,
-      courseName: 'React',
-      openRegistrations: true,
-      professorName: 'Pedro Sánchez'
-    },
-    {
-      id: '3',
-      commission: 45867,
-      courseName: 'Vue',
-      openRegistrations: false,
-      professorName: 'Renata Pérez'
-    },
-    {
-      id: '4',
-      commission: 45123,
-      courseName: 'NodeJS',
-      openRegistrations: true,
-      professorName: 'Rosa Aguilar'
-    },
-  ];
-
-  constructor() {
-    this.courses$ = new BehaviorSubject(this.courses);
+  
+  constructor(
+    private httpClient: HttpClient
+  ) {
   }
 
-  getCoursePromise(index: number): Promise<Course>{
-    return new Promise((resolve, reject) => {
-      let course = this.courses[index];
-      if(course){
-        resolve(course);
-      }else{
-        reject({
-          errCode: -1,
-          description: "error al obtener curso " + index
-        });
-      }
-    });
+  getCourseById(courseId:string): Observable<Course>{
+    return this.httpClient.get<Course>(`${env.apiURL}/courses/`+courseId)
   }
 
   getAllCoursesObservable(): Observable<Course[]>{
-    return this.courses$.asObservable();
+    return this.httpClient.get<Course[]>(`${env.apiURL}/courses`, {
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+        'encoding': 'UTF-8'
+      })
+    }).pipe(
+      catchError(this.captureError)
+    );
   }
   
-  addNewCourse(course:Course):void{
-    this.courses.unshift(course);
-    this.courses$.next(this.courses);
+  addNewCourse(course:Course): Observable<Course>{
+    return this.httpClient.post<Course>(`${env.apiURL}/courses`, course)
   }
 
-  editCourses(course:Course, index:number):void{
-    this.courses[index] = course;
-    this.courses$.next(this.courses);
+  editCourses(course:Course, courseId:string): Observable<Course>{
+    return this.httpClient.put<Course>(`${env.apiURL}/courses/${courseId}`, course);
   }
 
-  removeCourse(courseIndex: number):void{
-    this.courses.splice(courseIndex,1);
-    this.courses$.next(this.courses);
+  removeCourse(courseId:string): Observable<Course>{
+    return this.httpClient.delete<Course>(`${env.apiURL}/courses/${courseId}`);
+  }
+
+  private captureError(error: HttpErrorResponse){
+    if(error.error instanceof ErrorEvent){
+      alert(`Error del lado del cliente: ${error.message}`);
+    }else{
+      alert(`Error del lado del servidor: ${error.message}`);
+    }
+
+    return throwError(() => new Error('Error en el procesamiento de alumnos'));
   }
   
 }

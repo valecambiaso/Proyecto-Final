@@ -14,19 +14,8 @@ export class StudentService {
 
   }
 
-  getStudentPromise(studentId: string){
-    /*return new Promise((resolve, reject) => {
-      this.httpClient.get<Student>(`${env}/students/` + studentId).subscribe(student => {
-        if(student.id === studentId){
-          resolve(student)
-        }else{
-        reject({
-          errCode: -1,
-          description: "error al obtener estudiante " + studentId
-        });
-        }
-      })
-    });*/
+  getStudentById(studentId: string): Observable<Student>{
+    return this.httpClient.get<Student>(`${env.apiURL}/students/` + studentId)
   }
 
   getAllStudentsObservable(): Observable<Student[]>{
@@ -40,20 +29,16 @@ export class StudentService {
     );
   }
   
-  addNewStudent(student:Student):void{
-    
+  addNewStudent(student:Student):Observable<Student>{
+    return this.httpClient.post<Student>(`${env.apiURL}/students`, student)
   }
 
-  editStudent(student:Student, index:number):void{
-    
+  editStudent(student:Student, studentId:string):Observable<Student>{
+    return this.httpClient.put<Student>(`${env.apiURL}/students/${studentId}`, student);
   }
 
-  removeStudent(studentIndex: number):void{
-    
-  }
-  
-  activeStudents(){
-    
+  removeStudent(studentId: string):Observable<Student>{
+    return this.httpClient.delete<Student>(`${env.apiURL}/students/${studentId}`);
   }
 
   private captureError(error: HttpErrorResponse){
