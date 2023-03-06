@@ -38,16 +38,7 @@ export class StudentListComponent implements OnInit, OnDestroy{
     }
 
     activeStudents(){
-      console.log('Alumnos activos: ');
-      this.suscription.add(
-        this.studentService.activeStudents().subscribe({
-          next: (student) => {
-            console.log(student.name + ' ' + student.surname)
-          }, error: (error) => {
-            console.log(error.message)
-          }
-        })
-      );
+      
     }
 
     removeStudent(studentIndex: number):void{

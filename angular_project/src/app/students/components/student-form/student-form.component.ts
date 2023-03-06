@@ -28,7 +28,7 @@ export class StudentFormComponent{
   }
 
   private buildFormEdit(): void{
-    this.studentService.getStudentPromise(this.studentIndex).then((student: Student) => {
+    /*this.studentService.getStudentPromise(this.studentIndex.toString()).then((student: Student) => {
       this.student = student;
 
       this.action = 'Editar';
@@ -41,7 +41,7 @@ export class StudentFormComponent{
         bornDate: [this.student.bornDate, Validators.required],
         isActive: [this.student.isActive]
       });
-    });
+    });*/
   }
 
   private buildFormAdd(): void{

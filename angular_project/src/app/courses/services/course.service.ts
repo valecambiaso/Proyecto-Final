@@ -11,24 +11,28 @@ export class CourseService {
 
   private courses: Course[] = [
     {
+      id: '1',
       commission: 45635,
       courseName: 'Angular',
       openRegistrations: true,
       professorName: 'Julio López'
     },
     {
+      id: '2',
       commission: 45374,
       courseName: 'React',
       openRegistrations: true,
       professorName: 'Pedro Sánchez'
     },
     {
+      id: '3',
       commission: 45867,
       courseName: 'Vue',
       openRegistrations: false,
       professorName: 'Renata Pérez'
     },
     {
+      id: '4',
       commission: 45123,
       courseName: 'NodeJS',
       openRegistrations: true,

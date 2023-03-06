@@ -1,0 +1,71 @@
+{
+    "courses": [
+        {
+            "id": "1",
+            "commission": 45635,
+            "courseName": "Angular",
+            "openRegistrations": true,
+            "professorName": "Julio López"
+          },
+          {
+            "id": "2",
+            "commission": 45374,
+            "courseName": "React",
+            "openRegistrations": true,
+            "professorName": "Pedro Sánchez"
+          },
+          {
+            "id": "3",
+            "commission": 45867,
+            "courseName": "Vue",
+            "openRegistrations": false,
+            "professorName": "Renata Pérez"
+          },
+          {
+            "id": "4",
+            "commission": 45123,
+            "courseName": "NodeJS",
+            "openRegistrations": true,
+            "professorName": "Rosa Aguilar"
+          }
+    ],
+
+    "students": [
+        {
+            "id": "1",
+            "name": "Alejo",
+            "surname": "Torres",
+            "email": "alejo@gmail.com",
+            "cellphone": 154356789,
+            "bornDate": "1998-08-31T08:56:35.470Z",
+            "isActive": true
+          },
+          {
+            "id": "2",
+            "name": "Ana",
+            "surname": "Carrera",
+            "email": "ana@gmail.com",
+            "cellphone": 155654374,
+            "bornDate": "1999-11-20T08:56:35.470Z",
+            "isActive": true
+          },
+          {
+            "id": "3",
+            "name": "Paula",
+            "surname": "Diez",
+            "email": "paula@gmail.com",
+            "cellphone": 156432435,
+            "bornDate": "1996-09-20T23:45:38.187Z",
+            "isActive": false
+          },
+          {
+            "id": "4",
+            "name": "Diego",
+            "surname": "Barrios",
+            "email": "diego@gmail.com",
+            "cellphone": 154637448,
+            "bornDate": "1997-04-27T23:45:38.187Z",
+            "isActive": false
+          }
+    ]
+}

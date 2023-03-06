@@ -10,7 +10,7 @@ import { StudentsModule } from './students/students.module';
 import { MaterialModule } from './material.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './core/components/home/home.component';
-import { CoreModule } from './core/components/core.module';
+import { CoreModule } from './core/core.module';
 import { CoursesModule } from './courses/courses.module';
 
 
