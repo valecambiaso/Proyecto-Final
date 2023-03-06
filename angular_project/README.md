@@ -1,1 +1,1 @@
-Primera entrega del proyecto final del curso de Angular.
+Entrega del desafío Consumir Datos de una APIRest.
