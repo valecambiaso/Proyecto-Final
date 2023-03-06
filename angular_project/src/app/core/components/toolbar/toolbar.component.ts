@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Session } from '../../../models/session';
+import { SessionService } from '../../services/session.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,6 +10,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 
-export class ToolbarComponent {
-  
+export class ToolbarComponent implements OnInit{
+  session$!: Observable<Session>;
+
+  constructor(
+    private router: Router,
+    private sessionService: SessionService
+  ){}
+
+  ngOnInit(): void {
+    this.session$ = this.sessionService.getSession();
+  }
+
+  logout(){
+    let session: Session = {
+      activeSession: false
+    }
+    this.sessionService.logout(session);
+    this.router.navigate(['auth/login']);
+  }
 }

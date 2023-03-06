@@ -6,6 +6,9 @@ import { StudentFormComponent } from './components/student-form/student-form.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
+import { StudentService } from './services/student.service';
+import { StudentsRoutingModule } from './students-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,10 +20,11 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    StudentsRoutingModule
   ],
   providers: [
-    
+    StudentService
   ]
 })
 export class StudentsModule { }

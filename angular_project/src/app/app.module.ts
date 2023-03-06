@@ -12,6 +12,9 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './core/components/home/home.component';
 import { CoreModule } from './core/core.module';
 import { CoursesModule } from './courses/courses.module';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './authentication/components/login/login.component';
+import { InitialAuthComponent } from './authentication/components/initial-auth/initial-auth.component';
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { CoursesModule } from './courses/courses.module';
     ToolbarComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    InitialAuthComponent
   ],
   imports: [
     BrowserModule,

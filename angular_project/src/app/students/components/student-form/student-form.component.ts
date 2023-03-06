@@ -59,6 +59,7 @@ export class StudentFormComponent{
 
   addStudent(): void{
     const student: Student = {
+      id: JSON.stringify(this.studentForm.get('name')!.value),
       name: this.studentForm.get('name')!.value,
       surname: this.studentForm.get('surname')!.value,
       email: this.studentForm.get('email')!.value,

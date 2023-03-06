@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <h1>Account Login</h1>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Correo</label>
+        <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div class="valid" *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].valid">Campo correcto</div>
+        <div class="invalid" *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].errors?.['required']">Campo correo no puede ser vacío</div>
+        <div class="invalid" *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].errors?.['email']">Campo correo tiene un formato incorrecto</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+        <div class="input-group">
+            <input formControlName="password" type="password" class="form-control" id="password">
+            <div class="input-group-append">
+                <button id="password-btn" (click)="showOrHidePassword()" class="btn btn-purple" type="button">{{showText}}</button>
+            </div>
+        </div>
+        <div class="valid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].valid">Campo correcto</div>
+        <div class="invalid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].errors?.['required']">Campo contraseña no puede ser vacío</div>
+        <div class="invalid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].errors?.['minlength']">Campo contraseña tiene que tener mínimo 8 caracteres</div>
+    </div>
+    <div class="mb-3">
+        <mat-slide-toggle formControlName="isAdmin"><label>Administrador</label></mat-slide-toggle>
+    </div>
+    <button type="submit" class="btn btn-purple" [disabled]="loginForm.invalid">Ingresar</button>
+</form>

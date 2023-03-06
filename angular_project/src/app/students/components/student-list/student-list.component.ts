@@ -6,6 +6,8 @@ import { StudentFormComponent } from '../student-form/student-form.component';
 import { Observable, Subscription, filter, map, from, of } from 'rxjs';
 import { StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
+import { Session } from 'src/app/models/session';
+import { SessionService } from 'src/app/core/services/session.service';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -18,11 +20,13 @@ export class StudentListComponent implements OnInit, OnDestroy{
     columns: string[] = ['fullname','email','cellphone','bornDate','isActive','actions'];
     suscription!: Subscription;
     students!: Student[];
+    session$!: Observable<Session>;
 
     constructor(
       private dialog: MatDialog,
       private studentService: StudentService,
-      private router: Router
+      private router: Router,
+      private session: SessionService
     ){}
 
     ngOnInit(): void {
@@ -31,6 +35,7 @@ export class StudentListComponent implements OnInit, OnDestroy{
         this.dataSource.data = students;
       });
       this.dataSource$ = this.studentService.getAllStudentsObservable().pipe(map((students) => new MatTableDataSource<Student>(students)));
+      this.session$ = this.session.getSession();
     }
 
     ngOnDestroy(): void {

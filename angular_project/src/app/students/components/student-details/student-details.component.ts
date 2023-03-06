@@ -18,6 +18,7 @@ export class StudentDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((parameters) => this.student = {
+      id: parameters.get('id') || '',
       name: parameters.get('name') || '',
       surname: parameters.get('surname') || '',
       email: parameters.get('email') || '',

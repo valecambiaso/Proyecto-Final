@@ -1,14 +1,15 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon">
-      <mat-icon>school</mat-icon>
-    </button>
-    <span appTitleStyle>Alumnos e Inscripciones</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon">
-      <mat-icon>mode_comment</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon">
-      <mat-icon>share</mat-icon>
-    </button>
-</mat-toolbar>
-
+<ng-container *ngIf="session$ | async as session">
+  <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon">
+        <mat-icon>school</mat-icon>
+      </button>
+      <span appTitleStyle>Alumnos e Inscripciones</span>
+      <span class="example-spacer"></span>
+      <button *ngIf="!session.activeSession" routerLink="auth/login" mat-icon-button class="example-icon">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button *ngIf="session.activeSession" (click)="logout()" mat-icon-button class="example-icon">
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+  </mat-toolbar>
+</ng-container>

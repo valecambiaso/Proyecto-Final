@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { MatListModule } from '@angular/material/list';
     MatInputModule,
     MatToolbarModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatTableModule,
@@ -33,7 +35,8 @@ import { MatListModule } from '@angular/material/list';
     MatInputModule,
     MatToolbarModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule { }

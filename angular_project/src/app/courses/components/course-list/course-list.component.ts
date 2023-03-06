@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Course } from '../../../models/course';
 import { CourseService } from '../../services/course.service';
 import { CourseFormComponent } from '../course-form/course-form.component';
+import { SessionService } from '../../../core/services/session.service';
+import { Session } from '../../../models/session';
 
 @Component({
   selector: 'app-course-list',
@@ -20,11 +22,13 @@ export class CourseListComponent {
     columns: string[] = ['commission','courseName','openRegistration','professorName','actions'];
     suscription!: Subscription;
     courses!: Course[];
+    session$!: Observable<Session>;
 
     constructor(
       private dialog: MatDialog,
       private courseService: CourseService,
-      private router: Router
+      private router: Router,
+      private session: SessionService
     ){}
 
     ngOnInit(): void {
@@ -33,6 +37,7 @@ export class CourseListComponent {
         this.dataSource.data = courses;
       });
       this.dataSource$ = this.courseService.getAllCoursesObservable().pipe(map((courses) => new MatTableDataSource<Course>(courses)));
+      this.session$ = this.session.getSession();
     }
 
     ngOnDestroy(): void {
