@@ -16,12 +16,11 @@ export class LoginComponent {
   showPassword = false;
 
   constructor(
-    private loginService: LoginService,
-    private router: Router
+    private loginService: LoginService
   ){
     let controls: any = {
-      email: new FormControl('', [Validators.required, Validators.email]), //primero > valor del input predefinido - segundo > validaciones, restricciones para los controles del formulario (no vacio, numerico...)
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(4)]), //primero > valor del input predefinido - segundo > validaciones, restricciones para los controles del formulario (no vacio, numerico...)
+      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
       isAdmin: new FormControl(false)
     }
     this.loginForm = new FormGroup(controls);
@@ -35,11 +34,11 @@ export class LoginComponent {
   
   login(): void{
     let user: User = {
-      email: this.loginForm.value.email,
+      username: this.loginForm.value.username,
       password: this.loginForm.value.password,
       isAdmin: this.loginForm.value.isAdmin
     }
     this.loginService.login(user);
-    this.router.navigate(['home']);
+    // this.router.navigate(['home']);
   }
 }

@@ -21,12 +21,4 @@ export class ToolbarComponent implements OnInit{
   ngOnInit(): void {
     this.session$ = this.sessionService.getSession();
   }
-
-  logout(){
-    let session: Session = {
-      activeSession: false
-    }
-    this.sessionService.logout(session);
-    this.router.navigate(['auth/login']);
-  }
 }

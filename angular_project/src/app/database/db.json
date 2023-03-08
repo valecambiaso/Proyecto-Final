@@ -67,11 +67,31 @@
     {
       "id": "4",
       "name": "Diego",
-      "surname": "Barrios",
+      "surname": "Barrio",
       "email": "diego@gmail.com",
       "cellphone": 154637448,
       "bornDate": "1997-04-27",
       "isActive": false
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin",
+      "isAdmin": true
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "user",
+      "isAdmin": false
+    },
+    {
+      "id": "68RoxbT",
+      "username": "valentina",
+      "password": "valentina",
+      "isAdmin": true
     }
   ]
 }

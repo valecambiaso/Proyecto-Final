@@ -13,6 +13,7 @@ const routes: Routes = [ //Defino las rutas que forman parte del proyecto
     {path: '', redirectTo: 'home', pathMatch: 'full'}, //ruta base -> redirige a ...
     {path: 'students', loadChildren: () => import('./students/students.module').then((module) => module.StudentsModule)},
     {path: 'courses', loadChildren: () => import('./courses/courses.module').then((module) => module.CoursesModule)},
+    {path: 'users', loadChildren: () => import('./users/users.module').then((module) => module.UsersModule)},
     {path: 'auth', loadChildren: () => import('./authentication/authentication.module').then((module) => module.AuthenticationModule)},
     //{path: 'inscriptions'},
     {path: '**', component: PageNotFoundComponent}, //ruta no existe

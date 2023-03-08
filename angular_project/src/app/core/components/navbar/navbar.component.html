@@ -1,28 +1,40 @@
-<nav class="nav flex-column">
-      <a routerLink="home" mat-button class="menu-button nav-link">
-        <mat-icon>home</mat-icon>
-        <span>Inicio</span>
-      </a>
-      <br>
-      <a routerLink="students/list" mat-button class="menu-button nav-link">
-        <mat-icon>person</mat-icon>
-        <span>Alumnos</span>
-      </a>
-      <br>
-      <a routerLink="courses/list" mat-button class="menu-button nav-link">
-        <mat-icon>people</mat-icon>
-        <span>Cursos</span>
-      </a>
-      <br>
-      <button mat-button class="menu-button nav-link">
-        <mat-icon>person_add</mat-icon>
-        <span>Inscripciones</span>
-      </button>
-      <br>
-      <mat-divider></mat-divider>
-      <br>
-      <button mat-button class="menu-button nav-link">
-        <mat-icon>help</mat-icon>
-        <span>Ayuda</span>
-      </button>
-</nav>
+<ng-container *ngIf="session$ | async as session">
+  <nav class="nav flex-column">
+        <a routerLink="home" mat-button class="menu-button nav-link">
+          <mat-icon>home</mat-icon>
+          <span>Inicio</span>
+        </a>
+        <br>
+        <a routerLink="students/list" mat-button class="menu-button nav-link">
+          <mat-icon>person</mat-icon>
+          <span>Alumnos</span>
+        </a>
+        <br>
+        <a routerLink="courses/list" mat-button class="menu-button nav-link">
+          <mat-icon>people</mat-icon>
+          <span>Cursos</span>
+        </a>
+        <br>
+        <button mat-button class="menu-button nav-link">
+          <mat-icon>person_add</mat-icon>
+          <span>Inscripciones</span>
+        </button>
+        <br>
+       
+          <button *ngIf="session.activeUser?.isAdmin" routerLink="users/list" mat-button class="menu-button nav-link">
+            <mat-icon>alternate_email</mat-icon>
+            <span>Usuarios</span>
+          </button>
+          <br *ngIf="session.activeUser?.isAdmin">
+        <mat-divider></mat-divider>
+        <br>
+        <button *ngIf="!session.activeSession" routerLink="auth/login" mat-button class="menu-button nav-link">
+          <mat-icon>account_circle</mat-icon>
+          <span>Ingresar</span>
+        </button>
+        <button *ngIf="session.activeSession" (click)="logout()" mat-button class="menu-button nav-link">
+          <mat-icon>remove_circle</mat-icon>
+          <span>Salir</span>
+        </button>
+  </nav>
+</ng-container>

@@ -1,11 +1,11 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
     <h1>Account Login</h1>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Correo</label>
-        <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div class="valid" *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].valid">Campo correcto</div>
-        <div class="invalid" *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].errors?.['required']">Campo correo no puede ser vacío</div>
-        <div class="invalid" *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].errors?.['email']">Campo correo tiene un formato incorrecto</div>
+        <label for="exampleInput1" class="form-label">Usuario</label>
+        <input formControlName="username" type="text" class="form-control" id="exampleInput1">
+        <div class="valid" *ngIf="loginForm.controls['username'].dirty && loginForm.controls['username'].valid">Campo correcto</div>
+        <div class="invalid" *ngIf="loginForm.controls['username'].dirty && loginForm.controls['username'].errors?.['required']">Campo usuario no puede ser vacío</div>
+        <div class="invalid" *ngIf="loginForm.controls['username'].dirty && loginForm.controls['username'].errors?.['minlength']">Campo usuario tiene que tener mínimo 4 caracteres</div>
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
@@ -17,7 +17,7 @@
         </div>
         <div class="valid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].valid">Campo correcto</div>
         <div class="invalid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].errors?.['required']">Campo contraseña no puede ser vacío</div>
-        <div class="invalid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].errors?.['minlength']">Campo contraseña tiene que tener mínimo 8 caracteres</div>
+        <div class="invalid" *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].errors?.['minlength']">Campo contraseña tiene que tener mínimo 4 caracteres</div>
     </div>
     <div class="mb-3">
         <mat-slide-toggle formControlName="isAdmin"><label>Administrador</label></mat-slide-toggle>
