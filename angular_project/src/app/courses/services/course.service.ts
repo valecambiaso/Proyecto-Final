@@ -51,7 +51,7 @@ export class CourseService {
       alert(`Error del lado del servidor: ${error.message}`);
     }
 
-    return throwError(() => new Error('Error en el procesamiento de alumnos'));
+    return throwError(() => new Error('Error en el procesamiento de cursos'));
   }
   
 }

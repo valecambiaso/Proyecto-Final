@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../../models/course';
 import { ActivatedRoute } from '@angular/router';
-import { parseTemplate } from '@angular/compiler';
-import { Student } from 'src/app/models/student';
-import { MatTableDataSource } from '@angular/material/table';
-import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-details',

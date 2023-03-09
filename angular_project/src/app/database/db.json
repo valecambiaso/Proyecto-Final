@@ -29,7 +29,7 @@
       "professorName": "Rosa Aguilar"
     },
     {
-      "id": "J_4lkOv",
+      "id": "5",
       "commission": 45368,
       "courseName": "JavaScript",
       "openRegistrations": true,
@@ -72,6 +72,38 @@
       "cellphone": 154637448,
       "bornDate": "1997-04-27",
       "isActive": false
+    }
+  ],
+  "inscriptions":[
+    {
+      "id": "1",
+      "studentId": "1",
+      "courseId": "1"
+    },
+    {
+      "id": "2",
+      "studentId": "2",
+      "courseId": "1"
+    },
+    {
+      "id": "3",
+      "studentId": "3",
+      "courseId": "2"
+    },
+    {
+      "id": "4",
+      "studentId": "3",
+      "courseId": "3"
+    },
+    {
+      "id": "5",
+      "studentId": "4",
+      "courseId": "3"
+    },
+    {
+      "id": "6",
+      "studentId": "4",
+      "courseId": "4"
     }
   ],
   "users": [
