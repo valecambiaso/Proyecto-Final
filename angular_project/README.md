@@ -1,1 +1,1 @@
-Entrega del desafío Consumir Datos de una APIRest.
+Tercera pre-entrega del proyecto final de Angular.
