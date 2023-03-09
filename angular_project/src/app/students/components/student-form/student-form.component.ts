@@ -20,6 +20,17 @@ export class StudentFormComponent{
     private dialogRef: MatDialogRef<StudentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public studentId: string
   ){
+    //Esto está acá porque sino el test no lo pasa
+    this.studentForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(15)]], 
+      surname: ['', [Validators.required, Validators.maxLength(15)]], 
+      email: ['', [Validators.required, Validators.email]],
+      cellphone: ['', [Validators.required, Validators.pattern('^[0-9]{9,15}$')]],
+      bornDate: ['', Validators.required],
+      isActive: [false]
+    });
+    //Hasta acá (perdón la redundancia)
+
     if(this.studentId != ''){
       this.buildFormEdit();
     }else{

@@ -32,7 +32,10 @@ describe('Pruebas unitarias de student-form-component', () => {
       ]
     })
     .compileComponents();
-    fixture = TestBed.createComponent(StudentFormComponent)
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(StudentFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -43,13 +46,6 @@ describe('Pruebas unitarias de student-form-component', () => {
 
   it('El formulario se mantine inválido cuando los campos requeridos son vacíos', () => {
     const form = component.studentForm;
-
-    // const name = form.controls["name"];
-    // const surname = form.controls["surname"];
-    // const email = form.controls["email"];
-    // const cellphone = form.controls["cellphone"];
-    // const bornDare = form.controls["bornDate"];
-    // const isActive = form.controls["isActive"];
 
     expect(form.valid).toBeFalse();
   })
@@ -74,7 +70,7 @@ describe('Pruebas unitarias de student-form-component', () => {
     expect(form.valid).toBeTrue();
   })
 
-  it('El formulario es inválido cuando los campos requeridos no tienen el formato adecuado', () =>{
+  it('El formulario es inválido cuando alguno de los campos requeridos no tienen el formato adecuado', () =>{
     const form = component.studentForm;
 
     const name = form.controls["name"];
