@@ -1,6 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { StudentsRoutingModule } from '../../students-routing.module';
 
 import { StudentListComponent } from './student-list.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { StudentService } from '../../services/student.service';
 
 describe('StudentListComponent', () => {
   let component: StudentListComponent;
@@ -8,7 +15,18 @@ describe('StudentListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StudentListComponent ]
+      declarations: [ StudentListComponent ],
+      imports: [
+        CommonModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        SharedModule,
+        StudentsRoutingModule,
+        HttpClientModule
+      ],
+      providers: [
+        StudentService
+      ]
     })
     .compileComponents();
 

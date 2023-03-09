@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { StudentService } from './student.service';
@@ -5,8 +6,15 @@ import { StudentService } from './student.service';
 describe('StudentService', () => {
   let service: StudentService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports:[
+        HttpClientModule
+      ],
+      providers: [
+        StudentService
+      ]
+    }).compileComponents();
     service = TestBed.inject(StudentService);
   });
 

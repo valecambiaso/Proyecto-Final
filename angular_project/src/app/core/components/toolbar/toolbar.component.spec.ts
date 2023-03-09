@@ -1,6 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToolbarComponent } from './toolbar.component';
+import { MaterialModule } from '../../../material.module';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
@@ -8,7 +10,11 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ]
+      declarations: [ ToolbarComponent ],
+      imports:[
+          HttpClientModule,
+          MaterialModule
+      ]
     })
     .compileComponents();
 
