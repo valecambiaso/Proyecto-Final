@@ -9,9 +9,9 @@
     },
     {
       "id": "2",
-      "commission": 45374,
+      "commission": 45375,
       "courseName": "React",
-      "openRegistrations": true,
+      "openRegistrations": false,
       "professorName": "Pedro Sánchez"
     },
     {
@@ -74,7 +74,7 @@
       "isActive": false
     }
   ],
-  "inscriptions":[
+  "inscriptions": [
     {
       "id": "1",
       "studentId": "1",

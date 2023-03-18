@@ -8,6 +8,10 @@ import { StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 import { Session } from 'src/app/models/session';
 import { SessionService } from 'src/app/core/services/session.service';
+import { AppState } from 'src/app/core/state/app.state';
+import { Store } from '@ngrx/store';
+import { loadedStudentsSelector, loadingStudentsSelector } from '../../../core/state/students/students.selectors';
+import { loadStudents, studentsLoaded } from '../../../core/state/students/students.actions';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -21,20 +25,28 @@ export class StudentListComponent implements OnInit, OnDestroy{
     suscription!: Subscription;
     students!: Student[];
     session$!: Observable<Session>;
+    loading$!: Observable<Boolean>;
 
     constructor(
       private dialog: MatDialog,
       private studentService: StudentService,
       private router: Router,
-      private session: SessionService
+      private session: SessionService,
+      private store: Store<AppState>,
     ){}
 
     ngOnInit(): void {
+      this.loading$ = this.store.select(loadingStudentsSelector);
+      this.store.dispatch(loadStudents());
+
       this.dataSource = new MatTableDataSource<Student>();
       this.suscription = this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
         this.dataSource.data = students;
       });
-      this.dataSource$ = this.studentService.getAllStudentsObservable().pipe(map((students) => new MatTableDataSource<Student>(students)));
+      this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
+        this.store.dispatch(studentsLoaded({students: students}))
+      });
+      this.dataSource$ = this.store.select(loadedStudentsSelector).pipe(map((students) => new MatTableDataSource<Student>(students)));
       this.session$ = this.session.getSession();
     }
 

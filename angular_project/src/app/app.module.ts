@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,9 @@ import { CoursesModule } from './courses/courses.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './authentication/components/login/login.component';
 import { InitialAuthComponent } from './authentication/components/initial-auth/initial-auth.component';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCERS } from './core/state/app.state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -35,7 +38,9 @@ import { InitialAuthComponent } from './authentication/components/initial-auth/i
     CoursesModule,
     SharedModule,
     CoreModule,
-    MaterialModule
+    MaterialModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()})
   ],
   providers: [],
   bootstrap: [AppComponent]

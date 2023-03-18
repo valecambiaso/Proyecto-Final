@@ -10,6 +10,10 @@ import { CourseService } from '../../services/course.service';
 import { CourseFormComponent } from '../course-form/course-form.component';
 import { SessionService } from '../../../core/services/session.service';
 import { Session } from '../../../models/session';
+import { AppState } from 'src/app/core/state/app.state';
+import { Store } from '@ngrx/store';
+import { loadCourses, coursesLoaded } from '../../../core/state/courses/courses.actions';
+import { loadedCoursesSelector, loadingCoursesSelector } from '../../../core/state/courses/courses.selectors';
 
 @Component({
   selector: 'app-course-list',
@@ -23,20 +27,29 @@ export class CourseListComponent {
     suscription!: Subscription;
     courses!: Course[];
     session$!: Observable<Session>;
+    loading$!: Observable<Boolean>;
 
     constructor(
       private dialog: MatDialog,
       private courseService: CourseService,
       private router: Router,
-      private session: SessionService
+      private session: SessionService,
+      private store: Store<AppState>,
+
     ){}
 
     ngOnInit(): void {
+      this.loading$ = this.store.select(loadingCoursesSelector);
+      this.store.dispatch(loadCourses());
+      
       this.dataSource = new MatTableDataSource<Course>();
       this.suscription = this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
         this.dataSource.data = courses;
       });
-      this.dataSource$ = this.courseService.getAllCoursesObservable().pipe(map((courses) => new MatTableDataSource<Course>(courses)));
+      this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
+        this.store.dispatch(coursesLoaded({courses: courses}));
+      });
+      this.dataSource$ = this.store.select(loadedCoursesSelector).pipe(map((courses) => new MatTableDataSource<Course>(courses)));
       this.session$ = this.session.getSession();
     }
 
