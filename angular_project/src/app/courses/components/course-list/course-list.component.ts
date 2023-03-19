@@ -59,7 +59,12 @@ export class CourseListComponent {
 
     removeCourse(courseId: string):void{
       this.courseService.removeCourse(courseId).subscribe((course: Course) => {
-        this.dataSource$ = this.courseService.getAllCoursesObservable().pipe(map((courses) => new MatTableDataSource<Course>(courses)));
+        this.loading$ = this.store.select(loadingCoursesSelector);
+        this.store.dispatch(loadCourses());
+        this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
+          this.store.dispatch(coursesLoaded({courses: courses}));
+        });
+        this.dataSource$ = this.store.select(loadedCoursesSelector).pipe(map((courses) => new MatTableDataSource<Course>(courses)));  
       });
     }
 
@@ -73,7 +78,12 @@ export class CourseListComponent {
 
     private openModal(course: string){
       const dialogRef = this.dialog.open(CourseFormComponent, {data: course}).afterClosed().subscribe(()=>{
-        this.dataSource$ = this.courseService.getAllCoursesObservable().pipe(map((courses) => new MatTableDataSource<Course>(courses)));
+        this.loading$ = this.store.select(loadingCoursesSelector);
+        this.store.dispatch(loadCourses());
+        this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
+          this.store.dispatch(coursesLoaded({courses: courses}));
+        });
+        this.dataSource$ = this.store.select(loadedCoursesSelector).pipe(map((courses) => new MatTableDataSource<Course>(courses)));
       });
     }
 

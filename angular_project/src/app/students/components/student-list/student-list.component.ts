@@ -56,7 +56,12 @@ export class StudentListComponent implements OnInit, OnDestroy{
 
     removeStudent(studentId: string):void{
       this.studentService.removeStudent(studentId).subscribe((student: Student) => {
-        this.dataSource$ = this.studentService.getAllStudentsObservable().pipe(map((students) => new MatTableDataSource<Student>(students)));
+        this.loading$ = this.store.select(loadingStudentsSelector);
+        this.store.dispatch(loadStudents());
+        this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
+          this.store.dispatch(studentsLoaded({students: students}))
+        });
+        this.dataSource$ = this.store.select(loadedStudentsSelector).pipe(map((students) => new MatTableDataSource<Student>(students)));
       });
     }
 
@@ -70,7 +75,12 @@ export class StudentListComponent implements OnInit, OnDestroy{
 
     private openModal(student: string){
       const dialogRef = this.dialog.open(StudentFormComponent, {data: student}).afterClosed().subscribe(()=>{
-        this.dataSource$ = this.studentService.getAllStudentsObservable().pipe(map((students) => new MatTableDataSource<Student>(students)));
+        this.loading$ = this.store.select(loadingStudentsSelector);
+        this.store.dispatch(loadStudents());
+        this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
+          this.store.dispatch(studentsLoaded({students: students}))
+        });
+        this.dataSource$ = this.store.select(loadedStudentsSelector).pipe(map((students) => new MatTableDataSource<Student>(students)));
       });
     }
 

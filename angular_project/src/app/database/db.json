@@ -34,6 +34,13 @@
       "courseName": "JavaScript",
       "openRegistrations": true,
       "professorName": "Raúl Quinteros"
+    },
+    {
+      "id": "THfYx42",
+      "commission": 46536,
+      "courseName": "AngularJS",
+      "openRegistrations": true,
+      "professorName": "Leandro Martes"
     }
   ],
   "students": [
@@ -67,7 +74,7 @@
     {
       "id": "4",
       "name": "Diego",
-      "surname": "Barrio",
+      "surname": "Barrios",
       "email": "diego@gmail.com",
       "cellphone": 154637448,
       "bornDate": "1997-04-27",

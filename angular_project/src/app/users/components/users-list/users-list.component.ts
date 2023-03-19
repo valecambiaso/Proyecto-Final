@@ -57,7 +57,12 @@ export class UsersListComponent implements OnInit, OnDestroy{
 
     removeUser(userId: string):void{
       this.usersService.removeUser(userId).subscribe((user: User) => {
-        this.dataSource$ = this.usersService.getAllUsersObservable().pipe(map((users) => new MatTableDataSource<User>(users)));
+        this.loading$ = this.store.select(loadingUsersSelector);
+        this.store.dispatch(loadUsers());
+        this.usersService.getAllUsersObservable().subscribe((users: User[]) => {
+          this.store.dispatch(usersLoaded({users: users}));
+        })
+        this.dataSource$ = this.store.select(loadedUsersSelector).pipe(map((users) => new MatTableDataSource<User>(users)));  
       });
     }
 
@@ -70,8 +75,13 @@ export class UsersListComponent implements OnInit, OnDestroy{
     }
 
     private openModal(user: string){
-       const dialogRef = this.dialog.open(UserFormComponent, {data: user}).afterClosed().subscribe(()=>{
-         this.dataSource$ = this.usersService.getAllUsersObservable().pipe(map((users) => new MatTableDataSource<User>(users)));
+      const dialogRef = this.dialog.open(UserFormComponent, {data: user}).afterClosed().subscribe(()=>{
+        this.loading$ = this.store.select(loadingUsersSelector);
+        this.store.dispatch(loadUsers());
+        this.usersService.getAllUsersObservable().subscribe((users: User[]) => {
+          this.store.dispatch(usersLoaded({users: users}));
+        })
+        this.dataSource$ = this.store.select(loadedUsersSelector).pipe(map((users) => new MatTableDataSource<User>(users)));  
       });
     }
 
