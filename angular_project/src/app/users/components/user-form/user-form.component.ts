@@ -1,8 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
+import { UserState } from 'src/app/models/user.state';
 import { UsersService } from '../../services/users.service';
+import { addUser, editUser } from '../../state/user.actions';
 
 @Component({
   selector: 'app-user-form',
@@ -18,6 +21,7 @@ export class UserFormComponent {
     private formBuilder: FormBuilder,
     private usersService: UsersService,
     private dialogRef: MatDialogRef<UserFormComponent>,
+    private store: Store<UserState>,
     @Inject(MAT_DIALOG_DATA) public userId: string
   ){
     if(this.userId != ''){
@@ -60,9 +64,9 @@ export class UserFormComponent {
     };
 
     if(this.userId != ''){
-      this.usersService.editUser(user, this.userId).subscribe((user: User) => {});
+      this.store.dispatch(editUser({user: user, userId: this.userId}))
     }else{
-      this.usersService.addNewUser(user).subscribe((user: User) => {});
+      this.store.dispatch(addUser({user: user}))
     }
     this.closeForm();
   }

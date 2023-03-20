@@ -5,14 +5,13 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subscription } from 'rxjs';
 import { SessionService } from 'src/app/core/services/session.service';
-import { AppState } from 'src/app/core/state/app.state';
 import { Session } from 'src/app/models/session';
 import { User } from '../../../models/user';
 import { UsersService } from '../../services/users.service';
 import { UserFormComponent } from '../user-form/user-form.component';
-import { loadingUsersSelector, loadedUsersSelector } from '../../../core/state/users/users.selectors';
-import { loadUsers, usersLoaded } from '../../../core/state/users/users.actions';
-import { studentsLoaded } from '../../../core/state/students/students.actions';
+import { UserState } from '../../state/user.reducer';
+import { loadUsers, deleteUser, usersLoaded } from '../../state/user.actions';
+import { loadedUsersSelector, loadingUsersSelector } from '../../state/user.selectors';
 
 @Component({
   selector: 'app-users-list',
@@ -33,7 +32,7 @@ export class UsersListComponent implements OnInit, OnDestroy{
       private usersService: UsersService,
       private router: Router,
       private session: SessionService,
-      private store: Store<AppState>,
+      private store: Store<UserState>,
     ){}
 
     ngOnInit(): void {
@@ -44,9 +43,7 @@ export class UsersListComponent implements OnInit, OnDestroy{
       this.suscription = this.usersService.getAllUsersObservable().subscribe((users: User[]) => {
         this.dataSource.data = users;
       });
-      this.usersService.getAllUsersObservable().subscribe((users: User[]) => {
-        this.store.dispatch(usersLoaded({users: users}));
-      })
+      
       this.dataSource$ = this.store.select(loadedUsersSelector).pipe(map((users) => new MatTableDataSource<User>(users)));
       this.session$ = this.session.getSession();
     }
@@ -56,14 +53,8 @@ export class UsersListComponent implements OnInit, OnDestroy{
     }
 
     removeUser(userId: string):void{
-      this.usersService.removeUser(userId).subscribe((user: User) => {
-        this.loading$ = this.store.select(loadingUsersSelector);
-        this.store.dispatch(loadUsers());
-        this.usersService.getAllUsersObservable().subscribe((users: User[]) => {
-          this.store.dispatch(usersLoaded({users: users}));
-        })
-        this.dataSource$ = this.store.select(loadedUsersSelector).pipe(map((users) => new MatTableDataSource<User>(users)));  
-      });
+      this.loading$ = this.store.select(loadingUsersSelector);
+      this.store.dispatch(deleteUser({userId}));
     }
 
     openModalAdd():void{

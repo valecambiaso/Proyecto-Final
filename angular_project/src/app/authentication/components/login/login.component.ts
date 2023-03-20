@@ -3,6 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../../../models/user';
 import { LoginService } from '../../services/login.service';
 import { Route, Router } from '@angular/router';
+import { Session } from 'src/app/models/session';
+import { AuthState } from '../../state/auth.reducer';
+import { Store } from '@ngrx/store';
+import { loadAuths } from '../../state/auth.actions';
+import { SessionService } from '../../../core/services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +21,9 @@ export class LoginComponent {
   showPassword = false;
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router,
+    private session: SessionService
   ){
     let controls: any = {
       username: new FormControl('', [Validators.required, Validators.minLength(4)]), //primero > valor del input predefinido - segundo > validaciones, restricciones para los controles del formulario (no vacio, numerico...)
@@ -38,7 +45,10 @@ export class LoginComponent {
       password: this.loginForm.value.password,
       isAdmin: this.loginForm.value.isAdmin
     }
-    this.loginService.login(user);
-    // this.router.navigate(['home']);
+    this.loginService.login(user).subscribe((session: Session) => {
+      //this.authStore.dispatch(loadAuths({session: session}));
+      this.session.createSession(session);
+      this.router.navigate(['home']);
+    });
   }
 }

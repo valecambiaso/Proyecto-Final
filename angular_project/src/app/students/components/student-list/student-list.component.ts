@@ -8,10 +8,10 @@ import { StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 import { Session } from 'src/app/models/session';
 import { SessionService } from 'src/app/core/services/session.service';
-import { AppState } from 'src/app/core/state/app.state';
 import { Store } from '@ngrx/store';
-import { loadedStudentsSelector, loadingStudentsSelector } from '../../../core/state/students/students.selectors';
-import { loadStudents, studentsLoaded } from '../../../core/state/students/students.actions';
+import { StudentState } from '../../state/student.reducer';
+import { loadStudents, studentsLoaded, deleteStudent } from '../../state/student.actions';
+import { loadedStudentsSelector, loadingStudentsSelector } from '../../state/student.selectors';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -32,7 +32,7 @@ export class StudentListComponent implements OnInit, OnDestroy{
       private studentService: StudentService,
       private router: Router,
       private session: SessionService,
-      private store: Store<AppState>,
+      private store: Store<StudentState>,
     ){}
 
     ngOnInit(): void {
@@ -43,9 +43,7 @@ export class StudentListComponent implements OnInit, OnDestroy{
       this.suscription = this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
         this.dataSource.data = students;
       });
-      this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
-        this.store.dispatch(studentsLoaded({students: students}))
-      });
+
       this.dataSource$ = this.store.select(loadedStudentsSelector).pipe(map((students) => new MatTableDataSource<Student>(students)));
       this.session$ = this.session.getSession();
     }
@@ -55,14 +53,8 @@ export class StudentListComponent implements OnInit, OnDestroy{
     }
 
     removeStudent(studentId: string):void{
-      this.studentService.removeStudent(studentId).subscribe((student: Student) => {
-        this.loading$ = this.store.select(loadingStudentsSelector);
-        this.store.dispatch(loadStudents());
-        this.studentService.getAllStudentsObservable().subscribe((students: Student[]) => {
-          this.store.dispatch(studentsLoaded({students: students}))
-        });
-        this.dataSource$ = this.store.select(loadedStudentsSelector).pipe(map((students) => new MatTableDataSource<Student>(students)));
-      });
+      this.loading$ = this.store.select(loadingStudentsSelector);
+       this.store.dispatch(deleteStudent({studentId}));
     }
 
     openModalAdd():void{

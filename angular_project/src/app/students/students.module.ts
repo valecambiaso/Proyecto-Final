@@ -8,6 +8,10 @@ import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { StudentService } from './services/student.service';
 import { StudentsRoutingModule } from './students-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentStateEffects } from './state/student.effects';
+import { reducer, studentFeatureKey } from './state/student.reducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { StudentsRoutingModule } from './students-routing.module';
     MaterialModule,
     ReactiveFormsModule,
     SharedModule,
-    StudentsRoutingModule
+    StudentsRoutingModule,
+    StoreModule.forFeature(studentFeatureKey, reducer),
+    EffectsModule.forFeature(StudentStateEffects)
   ],
   providers: [
     StudentService

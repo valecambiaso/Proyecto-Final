@@ -8,6 +8,10 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersService } from './services/users.service';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { reducer, userFeatureKey } from './state/user.reducer';
+import { UserStateEffects } from './state/user.effects';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     MaterialModule,
     ReactiveFormsModule,
     SharedModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    StoreModule.forFeature(userFeatureKey, reducer),
+    EffectsModule.forFeature(UserStateEffects)
   ],
   providers:[
     UsersService

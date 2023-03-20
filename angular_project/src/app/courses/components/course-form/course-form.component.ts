@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Course } from 'src/app/models/course';
 import { CourseService } from '../../services/course.service';
+import { Store } from '@ngrx/store';
+import { CourseState } from '../../state/course-state.reducer';
+import { addCourse, editCourse } from '../../state/course-state.actions';
 
 @Component({
   selector: 'app-course-form',
@@ -18,6 +21,7 @@ export class CourseFormComponent {
     private formBuilder: FormBuilder,
     private courseService: CourseService,
     private dialogRef: MatDialogRef<CourseFormComponent>,
+    private store: Store<CourseState>,
     @Inject(MAT_DIALOG_DATA) public courseId: string
   ){
     if(this.courseId != ''){
@@ -63,9 +67,9 @@ export class CourseFormComponent {
     };
 
     if(this.courseId != ''){
-      this.courseService.editCourses(course, this.courseId).subscribe((course:Course) => {});
+      this.store.dispatch(editCourse({course: course, courseId: this.courseId}))
     }else{
-      this.courseService.addNewCourse(course).subscribe((course:Course) => {});
+      this.store.dispatch(addCourse({course: course}))
     }
     this.closeForm();
   }

@@ -8,6 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CourseService } from "./services/course.service";
+import { StoreModule } from '@ngrx/store';
+import { courseStateFeatureKey, reducer } from './state/course-state.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseStateEffects } from './state/course-state.effects';
 
 @NgModule({
     declarations:[
@@ -20,7 +24,9 @@ import { CourseService } from "./services/course.service";
         MaterialModule,
         ReactiveFormsModule,
         SharedModule,
-        CoursesRoutingModule
+        CoursesRoutingModule,
+        StoreModule.forFeature(courseStateFeatureKey, reducer),
+        EffectsModule.forFeature(CourseStateEffects)
     ],
     providers:[
         CourseService

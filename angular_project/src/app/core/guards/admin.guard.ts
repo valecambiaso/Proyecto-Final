@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { SessionService } from '../services/session.service';
-import { User } from 'src/app/models/user';
 import { Session } from 'src/app/models/session';
 
 @Injectable({

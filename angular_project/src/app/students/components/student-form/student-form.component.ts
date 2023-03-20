@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Student } from '../../../models/student';
 import { StudentService } from '../../services/student.service';
+import { Store } from '@ngrx/store';
+import { StudentState } from 'src/app/models/student.state';
+import { addStudent, editStudent } from '../../state/student.actions';
 
 @Component({
   selector: 'app-student-form',
@@ -18,6 +21,7 @@ export class StudentFormComponent{
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private dialogRef: MatDialogRef<StudentFormComponent>,
+    private store: Store<StudentState>,
     @Inject(MAT_DIALOG_DATA) public studentId: string
   ){
     this.buildFormAdd();
@@ -68,9 +72,9 @@ export class StudentFormComponent{
     };
 
     if(this.studentId != ''){
-      this.studentService.editStudent(student, this.studentId).subscribe((student: Student) => {});
+      this.store.dispatch(editStudent({student: student, studentId: this.studentId}))
     }else{
-      this.studentService.addNewStudent(student).subscribe((student: Student) => {});
+      this.store.dispatch(addStudent({student: student}))
     }
     this.closeForm();
   }

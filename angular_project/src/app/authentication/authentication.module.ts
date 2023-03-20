@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { authFeatureKey, reducer } from './state/auth.reducer';
 
 @NgModule({
     declarations:[
@@ -12,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         CommonModule,
         AuthenticationRoutingModule,
         SharedModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StoreModule.forFeature(authFeatureKey, reducer)
     ]
 })
 export class AuthenticationModule{}

@@ -10,10 +10,10 @@ import { CourseService } from '../../services/course.service';
 import { CourseFormComponent } from '../course-form/course-form.component';
 import { SessionService } from '../../../core/services/session.service';
 import { Session } from '../../../models/session';
-import { AppState } from 'src/app/core/state/app.state';
 import { Store } from '@ngrx/store';
-import { loadCourses, coursesLoaded } from '../../../core/state/courses/courses.actions';
-import { loadedCoursesSelector, loadingCoursesSelector } from '../../../core/state/courses/courses.selectors';
+import { loadingCoursesSelector, loadedCoursesSelector } from '../../state/course-state.selectors';
+import { loadCourses, coursesLoaded, deleteCourse } from '../../state/course-state.actions';
+import { CourseState } from '../../state/course-state.reducer';
 
 @Component({
   selector: 'app-course-list',
@@ -34,7 +34,7 @@ export class CourseListComponent {
       private courseService: CourseService,
       private router: Router,
       private session: SessionService,
-      private store: Store<AppState>,
+      private store: Store<CourseState>,
 
     ){}
 
@@ -46,9 +46,7 @@ export class CourseListComponent {
       this.suscription = this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
         this.dataSource.data = courses;
       });
-      this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
-        this.store.dispatch(coursesLoaded({courses: courses}));
-      });
+
       this.dataSource$ = this.store.select(loadedCoursesSelector).pipe(map((courses) => new MatTableDataSource<Course>(courses)));
       this.session$ = this.session.getSession();
     }
@@ -58,14 +56,8 @@ export class CourseListComponent {
     }
 
     removeCourse(courseId: string):void{
-      this.courseService.removeCourse(courseId).subscribe((course: Course) => {
-        this.loading$ = this.store.select(loadingCoursesSelector);
-        this.store.dispatch(loadCourses());
-        this.courseService.getAllCoursesObservable().subscribe((courses: Course[]) => {
-          this.store.dispatch(coursesLoaded({courses: courses}));
-        });
-        this.dataSource$ = this.store.select(loadedCoursesSelector).pipe(map((courses) => new MatTableDataSource<Course>(courses)));  
-      });
+      this.loading$ = this.store.select(loadingCoursesSelector);
+      this.store.dispatch(deleteCourse({courseId}));
     }
 
     openModalAdd():void{
