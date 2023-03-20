@@ -4,8 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Student } from '../../../models/student';
 import { StudentService } from '../../services/student.service';
 import { Store } from '@ngrx/store';
-import { StudentState } from 'src/app/models/student.state';
 import { addStudent, editStudent } from '../../state/student.actions';
+import { StudentState } from '../../state/student.reducer';
 
 @Component({
   selector: 'app-student-form',

@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
-import { UserState } from 'src/app/models/user.state';
 import { UsersService } from '../../services/users.service';
 import { addUser, editUser } from '../../state/user.actions';
+import { UserState } from '../../state/user.reducer';
 
 @Component({
   selector: 'app-user-form',
