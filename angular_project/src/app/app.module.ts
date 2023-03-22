@@ -18,6 +18,7 @@ import { InitialAuthComponent } from './authentication/components/initial-auth/i
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { InscriptionModule } from './inscriptions/inscription.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     StudentsModule,
     CoursesModule,
+    InscriptionModule,
     SharedModule,
     CoreModule,
     MaterialModule,

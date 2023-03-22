@@ -14,8 +14,8 @@ const routes: Routes = [ //Defino las rutas que forman parte del proyecto
     {path: 'students', loadChildren: () => import('./students/students.module').then((module) => module.StudentsModule)},
     {path: 'courses', loadChildren: () => import('./courses/courses.module').then((module) => module.CoursesModule)},
     {path: 'users', loadChildren: () => import('./users/users.module').then((module) => module.UsersModule)},
+    {path: 'inscriptions', loadChildren: () => import('./inscriptions/inscription.module').then((module) => module.InscriptionModule)},
     {path: 'auth', loadChildren: () => import('./authentication/authentication.module').then((module) => module.AuthenticationModule)},
-    //{path: 'inscriptions'},
     {path: '**', component: PageNotFoundComponent}, //ruta no existe
 ];
 

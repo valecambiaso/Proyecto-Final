@@ -15,10 +15,10 @@
           <span>Cursos</span>
         </a>
         <br>
-        <button mat-button class="menu-button nav-link">
+        <a routerLink="inscriptions/list" mat-button class="menu-button nav-link">
           <mat-icon>person_add</mat-icon>
           <span>Inscripciones</span>
-        </button>
+        </a>
         <br>
        
           <button *ngIf="session.activeUser?.isAdmin" routerLink="users/list" mat-button class="menu-button nav-link">
