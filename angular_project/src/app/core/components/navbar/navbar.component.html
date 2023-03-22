@@ -1,5 +1,5 @@
 <ng-container *ngIf="session$ | async as session">
-  <nav class="nav flex-column">
+  <nav class="nav flex-column" *ngIf="session.activeUser">
         <a routerLink="home" mat-button class="menu-button nav-link">
           <mat-icon>home</mat-icon>
           <span>Inicio</span>

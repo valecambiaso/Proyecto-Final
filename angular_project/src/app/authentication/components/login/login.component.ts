@@ -27,8 +27,7 @@ export class LoginComponent {
   ){
     let controls: any = {
       username: new FormControl('', [Validators.required, Validators.minLength(4)]), //primero > valor del input predefinido - segundo > validaciones, restricciones para los controles del formulario (no vacio, numerico...)
-      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      isAdmin: new FormControl(false)
+      password: new FormControl('', [Validators.required, Validators.minLength(4)])
     }
     this.loginForm = new FormGroup(controls);
   }
@@ -43,7 +42,7 @@ export class LoginComponent {
     let user: User = {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password,
-      isAdmin: this.loginForm.value.isAdmin
+      isAdmin: false
     }
     this.loginService.login(user).subscribe((session: Session) => {
       //this.authStore.dispatch(loadAuths({session: session}));

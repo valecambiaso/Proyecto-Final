@@ -21,7 +21,7 @@ export class LoginService {
   login(user: User): Observable<Session>{ //users?username=admin
     return this.httpClient.get<User[]>(`${env.apiURL}/users`).pipe(
       map((users: User[]) => {
-        let validatedUser = users.find((u: User) => u.username === user.username && u.password === user.password && u.isAdmin === user.isAdmin);
+        let validatedUser = users.find((u: User) => u.username === user.username && u.password === user.password);
         if(validatedUser) {
           const session: Session = {
             activeSession: true,
