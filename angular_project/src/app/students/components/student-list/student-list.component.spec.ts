@@ -8,6 +8,12 @@ import { StudentsRoutingModule } from '../../students-routing.module';
 import { StudentListComponent } from './student-list.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StudentService } from '../../services/student.service';
+import { StoreModule } from '@ngrx/store';
+import { studentFeatureKey } from '../../state/student.reducer';
+import { reducer } from '../../../authentication/state/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentStateEffects } from '../../state/student.effects';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('StudentListComponent', () => {
   let component: StudentListComponent;
@@ -22,10 +28,16 @@ describe('StudentListComponent', () => {
         ReactiveFormsModule,
         SharedModule,
         StudentsRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(studentFeatureKey,reducer),
+        EffectsModule.forRoot({}),
+        EffectsModule.forFeature(StudentStateEffects)
       ],
       providers: [
-        StudentService
+        StudentService,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }
       ]
     })
     .compileComponents();

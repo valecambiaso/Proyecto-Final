@@ -17,6 +17,10 @@ export class StudentDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.getBasicDetails();
+  }
+
+  private getBasicDetails() : void{
     this.activatedRoute.paramMap.subscribe((parameters) => this.student = {
       id: parameters.get('id') || '',
       name: parameters.get('name') || '',
@@ -25,6 +29,6 @@ export class StudentDetailsComponent implements OnInit{
       cellphone: parseInt(parameters.get('cellphone') || ''),
       bornDate: new Date(parameters.get('bornDate') || ''),
       isActive: parameters.get('isActive') === 'true'
-    })
+    });
   }
 }

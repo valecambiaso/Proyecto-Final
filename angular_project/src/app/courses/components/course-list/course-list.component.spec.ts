@@ -8,6 +8,12 @@ import { CoursesRoutingModule } from '../../courses-routing.module';
 import { CourseService } from '../../services/course.service';
 
 import { CourseListComponent } from './course-list.component';
+import { StoreModule } from '@ngrx/store';
+import { courseStateFeatureKey } from '../../state/course-state.reducer';
+import { reducer } from '../../../authentication/state/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseStateEffects } from '../../state/course-state.effects';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -23,9 +29,15 @@ describe('CourseListComponent', () => {
         ReactiveFormsModule,
         SharedModule,
         CoursesRoutingModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(courseStateFeatureKey,reducer),
+        EffectsModule.forRoot({}),
+        EffectsModule.forFeature(CourseStateEffects)
       ],
       providers: [
-        CourseService
+        CourseService,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }
       ]
     })
     .compileComponents();

@@ -10,6 +10,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesRoutingModule } from '../../courses-routing.module';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from '../../../users/services/users.service';
+import { StoreModule } from '@ngrx/store';
+import { courseStateFeatureKey } from '../../state/course-state.reducer';
+import { reducer } from '../../../authentication/state/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseStateEffects } from '../../state/course-state.effects';
 
 describe('CourseFormComponent', () => {
   let component: CourseFormComponent;
@@ -24,7 +29,11 @@ describe('CourseFormComponent', () => {
         CommonModule,
         ReactiveFormsModule,
         SharedModule,
-        CoursesRoutingModule
+        CoursesRoutingModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(courseStateFeatureKey,reducer),
+        EffectsModule.forRoot({}),
+        EffectsModule.forFeature(CourseStateEffects)
       ],
       providers: [
         CourseService,

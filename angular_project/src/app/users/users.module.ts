@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducer, userFeatureKey } from './state/user.reducer';
 import { UserStateEffects } from './state/user.effects';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { UserStateEffects } from './state/user.effects';
     EffectsModule.forFeature(UserStateEffects)
   ],
   providers:[
-    UsersService
+    UsersService,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class UsersModule { }

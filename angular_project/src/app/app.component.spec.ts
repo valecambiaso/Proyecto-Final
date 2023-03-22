@@ -1,6 +1,10 @@
+import { isDevMode } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InitialAuthComponent } from './authentication/components/initial-auth/initial-auth.component';
@@ -36,6 +40,9 @@ describe('AppComponent', () => {
         CoursesModule,
         SharedModule,
         CoreModule,
+        StoreModule.forRoot({},{}),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+        EffectsModule.forRoot([])
       ]
     }).compileComponents();
   });

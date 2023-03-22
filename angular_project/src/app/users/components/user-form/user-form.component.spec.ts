@@ -9,6 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersRoutingModule } from '../../users-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducer, userFeatureKey } from '../../state/user.reducer';
+import { UserStateEffects } from '../../state/user.effects';
 
 describe('UserFormComponent', () => {
   let component: UserFormComponent;
@@ -23,7 +27,11 @@ describe('UserFormComponent', () => {
         ReactiveFormsModule,
         SharedModule,
         HttpClientModule,
-        UsersRoutingModule
+        UsersRoutingModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(userFeatureKey, reducer),
+        EffectsModule.forRoot({}),
+        EffectsModule.forFeature(UserStateEffects)
       ],
       providers:[
         UsersService,

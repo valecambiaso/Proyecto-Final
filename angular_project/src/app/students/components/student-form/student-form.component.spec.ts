@@ -9,6 +9,11 @@ import { StudentsRoutingModule } from '../../students-routing.module';
 import { StudentService } from '../../services/student.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { StoreModule } from '@ngrx/store';
+import { studentFeatureKey } from '../../state/student.reducer';
+import { reducer } from '../../../authentication/state/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentStateEffects } from '../../state/student.effects';
 
 describe('Pruebas unitarias de student-form-component', () => {
   let component: StudentFormComponent;
@@ -23,7 +28,11 @@ describe('Pruebas unitarias de student-form-component', () => {
         ReactiveFormsModule,
         SharedModule,
         StudentsRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(studentFeatureKey,reducer),
+        EffectsModule.forRoot({}),
+        EffectsModule.forFeature(StudentStateEffects)
       ],
       providers: [
         StudentService,
