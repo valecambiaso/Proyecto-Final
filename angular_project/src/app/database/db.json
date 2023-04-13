@@ -1,0 +1,129 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "commission": 45631,
+      "courseName": "Angular",
+      "openRegistrations": true,
+      "professorName": "Julio López"
+    },
+    {
+      "id": "2",
+      "commission": 45375,
+      "courseName": "React",
+      "openRegistrations": false,
+      "professorName": "Pedro Sánchez"
+    },
+    {
+      "id": "3",
+      "commission": 45867,
+      "courseName": "VueTS",
+      "openRegistrations": true,
+      "professorName": "Renata Pérez"
+    },
+    {
+      "id": "4",
+      "commission": 45123,
+      "courseName": "NodeJS",
+      "openRegistrations": true,
+      "professorName": "Rosa Aguilar"
+    },
+    {
+      "id": "5",
+      "commission": 45368,
+      "courseName": "JavaScript",
+      "openRegistrations": true,
+      "professorName": "Raúl Quinteros"
+    },
+    {
+      "id": "THfYx42",
+      "commission": 46536,
+      "courseName": "AngularJS",
+      "openRegistrations": true,
+      "professorName": "Leandro Martes"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "name": "Alejo",
+      "surname": "Santos",
+      "email": "alejo@gmail.com",
+      "cellphone": 154356789,
+      "bornDate": "1998-08-31",
+      "isActive": true
+    },
+    {
+      "id": "2",
+      "name": "Ana",
+      "surname": "Carrera",
+      "email": "ana@gmail.com",
+      "cellphone": 155654374,
+      "bornDate": "1999-11-20",
+      "isActive": true
+    },
+    {
+      "id": "3",
+      "name": "Paula",
+      "surname": "Diez",
+      "email": "paula@gmail.com",
+      "cellphone": 156432435,
+      "bornDate": "1996-09-20",
+      "isActive": false
+    },
+    {
+      "id": "4",
+      "name": "Diego",
+      "surname": "Barrios",
+      "email": "diego@gmail.com",
+      "cellphone": 154637448,
+      "bornDate": "1997-04-27",
+      "isActive": false
+    },
+    {
+      "id": "1d2XADb",
+      "name": "Patricio",
+      "surname": "Star",
+      "email": "patricio@gmail.com",
+      "cellphone": 123456543,
+      "bornDate": "1999-05-04",
+      "isActive": false
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin",
+      "isAdmin": true
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "user",
+      "isAdmin": false
+    },
+    {
+      "id": "68RoxbT",
+      "username": "valentina",
+      "password": "valentina",
+      "isAdmin": true
+    }
+  ],
+  "inscriptions": [
+    {
+      "studentId": "2",
+      "studentFullName": "Ana Carrera",
+      "courseId": "1",
+      "courseName": "Angular",
+      "id": 2
+    },
+    {
+      "studentId": "2",
+      "studentFullName": "Ana Carrera",
+      "courseId": "4",
+      "courseName": "NodeJS",
+      "id": 3
+    }
+  ]
+}

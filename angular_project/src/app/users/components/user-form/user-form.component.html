@@ -1,0 +1,30 @@
+<h4 appTitleStyle>{{action}} Usuario</h4>
+
+<div mat-dialog-content class="dialog" *ngIf="userForm" >
+    <form [formGroup]="userForm">
+        <div class="form-group mb-3">
+            <label class="form-label">Nombre de usuario</label>
+            <input formControlName="username" type="text" class="form-control" required>
+            <div class="valid" *ngIf="userForm.controls['username'].dirty && userForm.controls['username'].valid">Campo correcto</div>
+            <div class="invalid" *ngIf="userForm.controls['username'].dirty && userForm.controls['username'].errors?.['required']">Este campo no puede ser vacío</div>
+            <div class="invalid" *ngIf="userForm.controls['username'].dirty && userForm.controls['username'].errors?.['minlength']">Este campo no puede tener menos de 4 caracteres</div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Contraseña</label>
+            <input formControlName="password" type="text" class="form-control">
+            <div class="valid" *ngIf="userForm.controls['password'].dirty && userForm.controls['password'].valid">Campo correcto</div>
+            <div class="invalid" *ngIf="userForm.controls['password'].dirty && userForm.controls['password'].errors?.['required']">Este campo no puede ser vacío</div>
+            <div class="invalid" *ngIf="userForm.controls['password'].dirty && userForm.controls['password'].errors?.['minlength']">Este campo no puede tener menos de 4 caracteres</div>
+        </div>
+        <div class="form-group mb-3">
+            <div class="form-check">
+                <input formControlName="isAdmin" type="checkbox" class="form-check-input">
+                <label class="form-check-label" for="exampleCheck1">Administrador</label>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions  *ngIf="userForm" >
+    <button mat-button class="btn btn-secondary" (click)="closeForm()">Cerrar</button>
+    <button mat-flat-button (click)="addUser()" class="btn btn-purple" [disabled]="userForm.invalid">{{action}}</button>
+</div>

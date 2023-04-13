@@ -1,0 +1,11 @@
+<ng-container *ngIf="session$ | async as session">
+  <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon">
+        <mat-icon>school</mat-icon>
+      </button>
+      <span appTitleStyle>Alumnos e Inscripciones</span>
+      <span class="example-spacer"></span>
+      <!--Aca va el nombre del user-->
+      <span *ngIf="session.activeSession" class="welcome">¡Bienvenido, {{session.activeUser?.username}}!</span>
+  </mat-toolbar>
+</ng-container>

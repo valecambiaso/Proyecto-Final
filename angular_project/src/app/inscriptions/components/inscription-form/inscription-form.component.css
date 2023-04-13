@@ -1,0 +1,51 @@
+h4{
+    color: #673ab7;
+    padding-top: 15px;
+    padding-left: 15px;
+    text-transform: uppercase;
+}
+
+.row{
+    padding-bottom: 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+form {
+    position: relative;
+    width: 400px;
+    background: white;
+}
+
+label{
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.form-control {
+    background: rgba(0, 0, 0, 0.144);
+}
+
+.form-check-input:checked {
+    background-color: rgb(126, 14, 255);
+    border-color: rgb(126, 14, 255);
+}
+
+.btn-purple{
+    background-color: rgb(126, 14, 255);
+    color: white;
+    text-transform: uppercase;
+    width: 75%;
+}
+
+.btn-secondary{
+    text-transform: uppercase;
+    width: 20%;
+}
